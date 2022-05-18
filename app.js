@@ -20,8 +20,8 @@ let ejs = require('ejs');
 
 const options = {                 // setting connection options
   host: 'localhost',
-  user: 'root',
-  password: 'venu@1982',
+  user: 'datablog',
+  password: '$ecurebl0g',
   database: 'secureblog',
 };
 
