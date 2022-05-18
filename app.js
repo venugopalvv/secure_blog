@@ -86,9 +86,11 @@ app
       const sessionID = req.session
       const CSRF_TOKEN = uuid();
       SESSION_IDS[sessionID] = CSRF_TOKEN;
+      toke = req.csrfToken()
       //console.log(CSRF_TOKEN);
       var username = req.session.user
-      res.render('changepwd', {CSRF_TOKEN: CSRF_TOKEN, username:username});
+      res.render('changepwd', {CSRF_TOKEN: toke, username:username});
+      console.log(toke)
     } catch (error) {
       console.log(error)
       res.json({ status: 'error', error: ';))' })
@@ -97,44 +99,39 @@ app
 
 
   
-  app.post('/changepwd', async (req, res) => {
-    const {csrftoken,pswcurrent,psw,pswrepeat} = req.body
+  app.post('/changepwd', csrfProtection,async (req, res) => {
+    console.log(req.body)
+    const {_csrf,pswcurrent,psw,pswrepeat} = req.body
     
     console.log(req.session.userid)
-    console.log(csrftoken)
+    console.log(_csrf)
     const sessionID = req.session
-  
-      if (SESSION_IDS[sessionID] && SESSION_IDS[sessionID] === csrftoken) {
+    db.query('SELECT * FROM accounts WHERE email = ?', [req.session.userid], async function(error, results, fields) {
+    console.log(results)
+    if (error) throw error;
+    if (results.length > 0 ) {
+      if (await bcrypt.compare(pswcurrent,results[0].password)) {
+        const password = await bcrypt.hash(pswrepeat, 10)
+        session=req.session;
+        console.log(pswcurrent)
+        db.query("UPDATE accounts SET password = ? WHERE email = ?" ,[password, results[0].email], (err, result) => {
+          if(err) throw err;
+          var msg1 = '';
+          var msg2 = 'Password changed Successfully!';
+          var msg3 = 'Login to continue.';
+          res.render("login",{message1:msg1, message2:msg2, message3:msg3});
+          res.render("login");
+          });
 
-          db.query('SELECT * FROM accounts WHERE email = ?', [req.session.userid], async function(error, results, fields) {
-
-          console.log(results)
-          if (error) throw error;
-          if (results.length > 0 ) {
-            if (await bcrypt.compare(pswcurrent,results[0].password)) {
-              const password = await bcrypt.hash(pswrepeat, 10)
-              session=req.session;
-              console.log(pswcurrent)
-              db.query("UPDATE accounts SET password = ? WHERE email = ?" ,[password, results[0].email], (err, result) => {
-                if(err) throw err;
-                var msg1 = '';
-                var msg2 = 'Password changed Successfully!';
-                var msg3 = 'Login to continue.';
-                res.render("login",{message1:msg1, message2:msg2, message3:msg3});
-                res.render("login");
-                });
-
-            }
-          }
-          else {
-            return res.json({ status: 'error', error: 'Invalid username/password' });
-          } 			
-          
-        });
-          
-      } else {
-          res.json({ status: 'nok', error: 'Invalid password' });
       }
+    }
+    else {
+      return res.json({ status: 'error', error: 'Invalid username/password' });
+    } 			
+    
+  });
+    
+
   });
 
 // Routes
