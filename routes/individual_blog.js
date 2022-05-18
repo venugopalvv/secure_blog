@@ -32,9 +32,19 @@ router
       if(err) throw err;
       db.query("DELETE FROM comments WHERE id = ?",[req.params.id], (err, result) => {
         if(err) throw err;
-        var username = req.session.user
-        var email = req.session.email
-      res.render("profilepage", {username:username, email:email});
+        db.query('SELECT * FROM blogs WHERE email = ?',[req.session.userid], (err, all_blogs) => {
+          if(err) throw err;
+          db.query('SELECT * FROM blogs LIMIT ?',[5], (err, latest_blogs) => {
+            if(err) throw err;
+              db.query('SELECT * FROM comments WHERE email = ?',[req.session.userid], (err, comments) => {
+                if(err) throw err;
+                
+                blogs_count = all_blogs.length
+                comments_count = comments.length
+                res.render("profilepage.ejs", {blogs:all_blogs, top_blogs:latest_blogs, email:req.session.userid, username:req.session.user, blogs_count:blogs_count, comments_count:comments_count});
+        });
+        });
+        });
     });
   });
   }else{
@@ -46,7 +56,7 @@ router
     if(typeof req.session.user !== 'undefined'){
     db.query("SELECT * FROM blogs WHERE id = ?",[req.params.id], (err, result) => {
       if(err) throw err;
-      var username = req.session.user
+      var username = req.session.user;
       res.render("editblog", {blogs: result, username:username});
     });
   }else{
