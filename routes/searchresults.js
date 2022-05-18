@@ -29,7 +29,8 @@ router
   db.query('SELECT * FROM blogs WHERE (title LIKE ? OR message LIKE ? OR postedBy LIKE ? OR email LIKE ?)', ['%' + search + '%', '%' + search + '%', '%' + search + '%', '%' + search + '%'], (err, search_results) => {
     if(err) throw err;
     var search_count = search_results.length
-    res.render("searchloggedin.ejs", {blogs:search_results, search_count:search_count});
+    var username = req.session.user
+    res.render("searchloggedin.ejs", {blogs:search_results, search_count:search_count, username:username});
   });
 }
 else{
