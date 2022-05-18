@@ -11,6 +11,7 @@ const otpGenerator = require('otp-generator');
 var nodemailer = require('nodemailer');
 const https = require('https')
 var sanitizeHtml = require('sanitize-html');
+const SMTPConnection = require("nodemailer/lib/smtp-connection");
 global.OTP_gen = ''
 global.OTP_attempt = 5
 global.OTP_time = ''
@@ -54,10 +55,11 @@ store: sessionStore,
 }));
 
 var transporter = nodemailer.createTransport({
-service: 'gmail',
+  host:'smtp.ionos.co.uk',
+  port:'25',
 auth: {
-  user: 'bonyjohnomcr@gmail.com',
-  pass: 'dtonaqcirzwlwquq'
+  user: 'm108405446-155422786',
+  pass: 'Venu@1982'
 }
 });
 
@@ -87,7 +89,7 @@ db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error
         var email_addr=req.body.email;
 
         transporter.sendMail({
-        from: 'youremail@gmail.com',
+        from: 'otp@secureblog.co.uk',
         to: req.body.email,
         subject: 'Your One Time Password',
         text: 'Your onetime password to safely login in to your account is ' + OTP + '. OTP is secret and can be used only once. Therefore, do not disclose this to anyone.'

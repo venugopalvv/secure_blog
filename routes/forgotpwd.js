@@ -16,12 +16,13 @@ var email_f='';
 
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'bonyjohnomcr@gmail.com',
-    pass: 'dtonaqcirzwlwquq'
-  }
-  });
+  host:'smtp.ionos.co.uk',
+  port:'25',
+auth: {
+  user: 'm108405446-155422786',
+  pass: 'Venu@1982'
+}
+});
 
   router
   .get("/forgotpwd", (req, res) => {
