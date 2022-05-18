@@ -1,0 +1,78 @@
+<%- include("./partials/header") %>
+<%- include("./partials/navbar4") %>
+<style>
+    .login {
+        min-height: 100vh;
+    }
+    
+    .bg-image {
+        background-image: url('https://i.ibb.co/W3FWBp6/ernest-imoesi-Pu-Eh-q-N50-Y4-unsplash.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .login-heading {
+        font-weight: 300;
+    }
+    
+    .btn-login {
+        font-size: 0.9rem;
+        letter-spacing: 0.05rem;
+        padding: 0.75rem 1rem;
+    }
+    .login-form .form-group {
+    position: relative;
+}
+    .login-form .form-group .forgot-password {
+    position: absolute;
+    top: 6px;
+    right: 15px;
+}
+
+</style>
+
+<!-- Modal Form -->
+<div class="modal fade" id="ModalForm" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        
+      <!-- Login Form -->
+        <form action="">
+          <div class="modal-header">
+            <h5 class="modal-title">Welcome Back!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="email">Email<span class="required-field">*</span></label>
+              <input type="email" class="form-control" placeholder="Enter Email" name="email" required>
+            </div>
+          <div class="form-group">
+            <label for="psw-repeat">Repeat Password<span class="required-field">*</span></label>
+            <input id="confirm_password" type="password" class="form-control" placeholder="Repeat Password" name="psw-repeat" required>
+          </div>
+
+          <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
+            <label class="form-check-label" for="rememberPasswordCheck">
+              Remember password
+            </label>
+          </div>
+          <br/>
+          <div class="d-grid mb-4">
+            <button class="btn btn-primary btn-md" id="submitButton" type="submit">Login</button>
+          </div>
+          <div class="form-group mb-4">
+              <div class="text-center"><a href="#!">Forgot Password</a></div>
+          </div>
+          <div class="form-group mb-4">
+            <div class="text-center">New Member? <a href="#!">Sign up Now</a></div>
+          </div>
+          </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
+
+<%- include("./partials/footer") %>

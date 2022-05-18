@@ -1,0 +1,99 @@
+<%- include("./partials/header") %>
+<%- include("./partials/navbar") %>
+
+<style>
+
+body {
+  background: #007bff;
+  background: linear-gradient(to right, #0062E6, #33AEFF);
+}
+
+.card-img-left {
+  width: 45%;
+  /* Link to your background image using in the property below! */
+  background: scroll center url('https://i.ibb.co/ZK7k2bV/evgeni-savchenko-E2-Zu-Bb-Btr-Vk-unsplash.jpg');
+  background-size: cover;
+}
+
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
+</style>
+
+
+<body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+          <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+            <div class="card-img-left d-none d-md-flex">
+              <!-- Background image for card set in CSS! -->
+            </div>
+            <div class="card-body p-4 p-sm-5">
+              <h5 class="card-title text-center mb-5 fw-light fs-5">User registration </h5>
+              
+              <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+  
+                <div class="form-floating mb-4">
+                    <input type="name" class="form-control" id="name" type="text" placeholder="Name" data-sb-validations="required"/>
+                    <label for="name">Name</label>
+                    <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
+                  </div>
+
+                <div class="form-floating mb-4">
+                  <input type="username" class="form-control" id="username" data-sb-validations="required" placeholder="Username"/>
+                  <label for="username">Username</label>
+                  <div class="invalid-feedback" data-sb-feedback="username:required">Username is required.</div>
+                </div>
+  
+                <div class="form-floating mb-4">
+                  <input type="email" class="form-control" id="email" data-sb-validations="required" placeholder="Email"/>
+                  <label for="email">E-mail</label>
+                  <div class="invalid-feedback" data-sb-feedback="email:required">E-mail is required.</div>
+                </div>
+                <hr>
+                <div class="form-floating mb-4">
+                  <input type="password" class="form-control" id="password" data-sb-validations="required" placeholder="Password"/>
+                  <label for="password">Password</label>
+                  <div class="invalid-feedback" data-sb-feedback="password:required">Password is required.</div>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input type="repassword" class="form-control" id="repassword" data-sb-validations="required" placeholder="Confirm Password"/>
+                    <label for="repassword">Password</label>
+                    <div class="invalid-feedback" data-sb-feedback="repassword:required">Re-enter password.</div>
+                  </div>
+  
+                <!-- Submit success message -->
+                <div class="d-none" id="submitSuccessMessage">
+                    <div class="text-center mb-3">
+                    <div class="fw-bolder">Registration successful!</div>
+                    <p>Login to continue...</p>
+                    </div>
+                </div>
+    
+                <!-- Submit error message -->
+                <div class="d-none" id="submitErrorMessage">
+                    <div class="text-center text-danger mb-3">Error sending message!</div>
+                </div>
+
+                <div class="d-grid mb-2">
+                    <button class="btn btn-primary btn-md disabled" id="submitButton" type="submit">Submit</button>
+                </div>
+  
+                <a class="d-block text-center mt-2 small" href="#">Have an account? Sign In</a>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+<!-- CDN Link to SB Forms Scripts -->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+  <%- include("./partials/footer") %>

@@ -1,0 +1,74 @@
+<%- include("./partials/header") %>
+<%- include("./partials/navbar") %>
+<style>
+    .login {
+        min-height: 100vh;
+    }
+    
+    .bg-image {
+        background-image: url('https://i.ibb.co/m5r6BVX/4957136.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+    .btn-primary{
+        background-color: #0b80fc !important;
+        background-repeat: repeat-x;
+        color: #fff !important;
+    }
+  
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+        background-color: #0b80fc !important;
+        background-repeat: repeat-x;
+        color: rgb(250, 246, 246) !important;
+    }
+
+</style>
+
+<div class="container-fluid ps-md-0">
+    <div class="row g-0">
+      <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+      <div class="col-md-8 col-lg-6">
+        <div class="login d-flex align-items-center py-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-9 col-lg-8 mx-auto">
+                <h3 class="login-heading mb-4"><%= msg1 %></h3>
+                <h4 class="login-heading mb-4" style="color:#eb1579"><%= msg2 %></h4>
+                <h6 class="login-heading mb-4"><%= msg3 %> <%= email.slice(0, 2) %>****<%= email.slice(4, 8) %>*****<%= email.slice(-3) %>.</h6>
+                <h6 class="login-heading mb-4"><%= msg4 %>.</h6>
+
+                <!-- Sign In Form -->
+                <form action="/loginotp" method="POST">
+                    <fieldset disabled>
+                  <div class="form-group">
+                    <label for="email">Email<span class="required-field">*</span></label>
+                    <input type="email" class="form-control" placeholder="**********" name="email" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="psw-repeat">Password<span class="required-field">*</span></label>
+                    <input id="confirm_password" type="password" class="form-control" placeholder="**********" name="psw" required>
+                  </div>
+                </fieldset>
+                  <div class="form-group">
+                    <label for="psw-repeat">Enter OTP recieved on your email<span class="required-field">*</span></label>
+                    <input id="confirm_password" type="password" class="form-control" placeholder="Enter OTP here" name="recieved_otp" required>
+                  </div>
+  
+                  <br/>
+                  <div class="d-grid mb-4">
+                    <button class="btn btn-primary btn-md" id="submitButton" type="submit">Login</button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- CDN Link to SB Forms Scripts -->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<%- include("./partials/footer") %>

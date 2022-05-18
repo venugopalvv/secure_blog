@@ -1,0 +1,61 @@
+<%- include("./partials/header") %>
+<%- include("./partials/navbar") %>
+
+<style>
+  
+body {
+    background: #ffffff;
+    background: linear-gradient(to right, #186c91, #063970);
+  }
+
+  .btn-primary{
+        background-color: #063970 !important;
+        background-repeat: repeat-x;
+        color: #fff !important;
+    }
+  
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+        background-color: #063970 !important;
+        background-repeat: repeat-x;
+        color: rgb(250, 246, 246) !important;
+    }
+</style>
+
+<div class="container px-5 my-5" style = "position:relative; top:100px;">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card border-0 rounded-3 shadow-lg">
+          <div class="card-body" >
+            <div class="text-center">
+              <h2 style="text-align:left;color:#063970;">Write a new post</h2> 
+              <p class="mb-4 text-muted"></p>
+            </div>
+  
+            <form action="/composeblog1" method="POST">
+                <div class="form-group">
+                    <label for="title">Title<span class="required-field">*</span></label>
+                    <input type="text" class="form-control" placeholder="Blog title here..." name="title" required>
+                </div> 
+
+                <div class="form-group">
+                  <label for="message">Message<span class="required-field">*</span></label>
+                  <textarea class="form-control" id="message" type="text" placeholder="Write your blog here..." style="height: 10rem;" name="message" required></textarea>
+              </div> 
+
+              <div class="form-group">
+                <label>Image</label>
+                <input type="file" id="Profile-pic" name="channel-img" class="form-control">
+              </div>
+
+              <div class="form-group float-end">
+                <button class="btn btn-primary btn-md" id="submitButton" type="submit">Post</button>
+                <button class="btn btn-primary btn-md" id="submitButton" type="submit">Cancel</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <%- include("./partials/footer") %>

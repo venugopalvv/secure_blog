@@ -1,0 +1,156 @@
+<%- include("./partials/header") %>
+<%- include("./partials/navbar") %>
+
+<style>
+    .login {
+        min-height: 100vh;
+    }
+
+    .bg-image {
+        background-image: url('https://i.ibb.co/1LbSz1B/Data-security-26.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .form-control {
+    border: none;
+    background: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    transition: border-color .4s ease-out;
+    border-radius: 0;
+    }
+
+    .form-control:active,
+    .form-control:focus,
+    .btn.focus,
+    .btn:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: black;
+    }
+
+    .form-control.valid {
+    border-color: green;
+    }
+
+    .form-control.invalid {
+    border-color: red;
+    }
+
+    .form-control + small {
+    color: red;
+    opacity: 0;
+    height: 0;
+    transition: opacity .4s ease-out;
+    }
+
+    .form-control.invalid + small {
+    opacity: 1;
+    height: auto;
+    margin-bottom: 20px;
+    transition: opacity .4s ease-out;
+    }
+    .btn-primary{
+        background-color: #0b80fc !important;
+        background-repeat: repeat-x;
+        color: #fff !important;
+    }
+  
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+        background-color: #0b80fc !important;
+        background-repeat: repeat-x;
+        color: rgb(250, 246, 246) !important;
+    }
+</style>
+
+<div class="container-fluid ps-md-0">
+    <div class="row g-0">
+      <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+      <div class="col-md-8 col-lg-6">
+        <div class="login d-flex align-items-center py-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-9 col-lg-8 mx-auto">
+                <h3 class="login-heading mb-4">Reset Password</h3>
+  
+                <!-- Sign In Form -->
+                <form action="/forgotpwdotp", method="POST">
+                    <fieldset disabled>
+                    <div class="form-group">
+                        <label for="email">Email<span class="required-field">*</span></label>
+                        <input type="email" class="form-control" placeholder=<%= email %> name="email" required>
+                    </div> 
+                    </fieldset>
+                    <div class="form-group">
+                        <label for="psw-repeat">Enter OTP recieved on your email<span class="required-field">*</span></label>
+                        <input id="confirm_password" type="password" class="form-control" placeholder="Enter OTP here" name="recieved_otp" required>
+                      </div>
+                    
+                    <br/>
+                    <div class="d-grid mb-4">
+                        <button class="btn btn-primary btn-md" id="submitButton" type="submit">Submit</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script> 
+
+    const inputs = document.querySelectorAll('input');
+    var button = document.getElementById('submitButton');
+    let submitCheck = "Fail"
+
+    const patterns = {
+    password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
+    };
+
+    inputs.forEach((input) => {
+    input.addEventListener('keyup', (e) => {
+        validate(e.target, patterns[e.target.attributes.id.value]);
+    });
+    });
+
+    function validate(field, regex) {
+    if (regex.test(field.value)) {
+        field.className = 'form-control valid';
+        submitCheck = "Pass";
+    } else {
+        field.className = 'form-control invalid';
+        submitCheck = "Fail";
+    }
+    }
+
+    var password = document.getElementById("password")
+    , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword(){
+    if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+    } else {
+        confirm_password.setCustomValidity('');
+    }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword; 
+
+    function validateForm(){
+    if (submitCheck == "Fail"){
+       button.disabled = true;
+    } else {
+       button.disabled = false;
+    }
+    }
+    form.addEventListener('submit', function(event){
+        event.preventDefault();
+        console.log("submitted")
+
+    })
+
+</script>
+<%- include("./partials/footer") %>

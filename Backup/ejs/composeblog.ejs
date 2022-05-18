@@ -1,0 +1,19 @@
+<%- include("./partials/header") %>
+<%- include("./partials/navbar") %>
+
+<div class="container-sm p-5 ">
+    <form>
+    <div class="mb-3">
+        <label class="form-label" for="Title">Title</label>
+        <input type="email" class="form-control" placeholder="Enter the Title">
+    </div>
+    <div class="form-floating mb-3">
+        <textarea class="form-control" placeholder="Enter your text here" style="height: 100px"></textarea>
+        <label for="Message">Message</label>
+      </div>
+    <button type="submit" class="btn btn-primary btn-md center-block">Post</button>
+    <button type="submit" class="btn btn-primary btn-md center-block">Cancel</button>
+    </form>
+</div>
+
+<%- include("./partials/footer") %>

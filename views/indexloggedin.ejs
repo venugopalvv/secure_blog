@@ -1,0 +1,739 @@
+<%- include("./partials/header") %>
+<%- include("./partials/navbarloggedin", {username:username}) %>
+
+<style>
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#hero {
+  width: 100%;
+  height: 70vh;
+  background: white;
+  border-bottom: 2px solid white;
+}
+#hero .container {
+  padding-top: 80px;
+}
+#hero h1 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 56px;
+  color: #434175;
+  font-family: "Poppins", sans-serif;
+}
+#hero h2 {
+  margin: 10px 0 0 0;
+  font-size: 20px;
+}
+#hero ul {
+  margin-top: 15px;
+  list-style: none;
+  padding: 0;
+}
+#hero ul li {
+  padding: 10px 0 0 28px;
+  position: relative;
+}
+#hero ul i {
+  left: 0;
+  top: 7px;
+  position: absolute;
+  font-size: 20px;
+  color: #0b80fc;
+}
+#hero .btn-get-started, #hero .btn-get-quote {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  padding: 8px 30px 9px 30px;
+  margin-bottom: 15px;
+  border-radius: 3px;
+  transition: 0.5s;
+  border-radius: 50px;
+}
+#hero .btn-get-started {
+  background: #0b80fc;
+  color: #fff;
+  border: 2px solid #0b80fc;
+  margin-right: 10px;
+}
+#hero .btn-get-started:hover {
+  background: #7272f5;
+  border-color: #7272f5;
+}
+#hero .btn-get-quote {
+  color: #0b80fc;
+  border: 2px solid #0b80fc;
+}
+#hero .btn-get-quote:hover {
+  background: #0b80fc;
+  color: #fff;
+}
+@media (min-width: 1024px) {
+  #hero {
+    background-attachment: fixed;
+  }
+}
+@media (max-width: 991px) {
+  #hero .hero-img {
+    text-align: center;
+  }
+  #hero .hero-img img {
+    width: 50%;
+  }
+}
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero h2 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+  #hero .hero-img img {
+    width: 70%;
+  }
+}
+@media (max-width: 575px) {
+  #hero {
+    text-align: center;
+  }
+  #hero ul {
+    text-align: left;
+    font-size: 14px;
+  }
+  #hero .hero-img img {
+    width: 80%;
+  }
+  #hero .btn-get-started, #hero .btn-get-quote {
+    padding-left: 18px;
+    padding-right: 18px;
+    font-size: 14px;
+  }
+}
+
+
+/*--------------------------------------------------------------
+# Card - Test blogs
+--------------------------------------------------------------*/
+
+* {
+  margin: 0;
+  padding: 0; }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #191919;
+  line-height: 1.3;
+  font-weight: 500; }
+
+p {
+  color: #180303;
+  font-size: 16px;
+  line-height: 2;
+  font-weight: 400; }
+
+ul,
+ol {
+  margin: 0; }
+  ul li,
+  ol li {
+    list-style: none; }
+
+img {
+  height: auto;
+  max-width: 100%; }
+
+/* :: 3.1.0 Spacing */
+.mt-5 {
+  margin-top: 5px !important; }
+.mt-10 {
+  margin-top: 10px !important; }
+.mt-15 {
+  margin-top: 15px !important; }
+
+.mt-30 {
+  margin-top: 30px !important; }
+
+.mt-50 {
+  margin-top: 50px !important; }
+
+.mt-70 {
+  margin-top: 70px !important; }
+
+.mt-100 {
+  margin-top: 100px !important; }
+
+.mb-15 {
+  margin-bottom: 15px !important; }
+
+.mb-30 {
+  margin-bottom: 30px !important; }
+
+.mb-50 {
+  margin-bottom: 50px !important; }
+
+.mb-70 {
+  margin-bottom: 70px !important; }
+
+.mb-100 {
+  margin-bottom: 100px !important; }
+
+.ml-15 {
+  margin-left: 15px !important; }
+
+.ml-30 {
+  margin-left: 30px !important; }
+
+.ml-50 {
+  margin-left: 50px !important; }
+
+.mr-15 {
+  margin-right: 15px !important; }
+
+.mr-30 {
+  margin-right: 30px !important; }
+
+.mr-50 {
+  margin-right: 50px !important; }
+
+/* :: 7.0 Featured Post Sildes CSS */
+.featured-post-area {
+  position: relative;
+  z-index: 2; }
+  .featured-post-area .featured-post-content {
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid #ebebeb; }
+    .featured-post-area .featured-post-content .post-date {
+      font-weight: 625;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #0b80fc; }
+    .featured-post-area .featured-post-content .post-title h2 {
+      -webkit-transition-duration: 500ms;
+      transition-duration: 500ms;
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 20px; }
+      .featured-post-area .featured-post-content .post-title h2:hover {
+        color: #0b80fc; }
+        .featured-post-area .featured-post-content .post-excerpt {
+      margin-bottom: 10px; 
+    }
+
+
+
+.post-sidebar-area {
+  position: relative;
+  z-index: 1; }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .post-sidebar-area {
+      margin-top: 50px; } }
+  @media only screen and (max-width: 767px) {
+    .post-sidebar-area {
+      margin-top: 50px; } }
+
+/* :: 11.0 Blog Area CSS */
+.single-blog-post {
+  position: relative;
+  z-index: 1; }
+  .single-blog-post .post-thumbnail {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px; }
+  .single-blog-post .post-content .post-date {
+    font-weight: 625;
+    font-size: 13px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #0b80fc;
+    margin-bottom: 0; }
+  .single-blog-post .post-content .post-title h4 {
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    font-weight: 500; }
+    .single-blog-post .post-content .post-title h4:hover {
+      color: #0b80fc; }
+
+  /* Zoom In #1 */
+  .single-blog-post .post-thumbnail img {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.single-blog-post .post-thumbnail:hover img {
+	-webkit-transform: scale(1.03);
+	transform: scale(1.03);
+}
+
+
+
+/* :: 14.0 Pager CSS */
+.nikki-pager {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+  .nikki-pager li a {
+    background-color: #0b80fc;
+    width: 130px;
+    height: 44px;
+    border: 1px solid white;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 42px;
+    text-align: center; }
+    .nikki-pager li a:hover, .nikki-pager li a:focus {
+      color: #191919; }
+
+/* :: 15.0 Sidebar Area CSS */
+.single-widget-area {
+  position: relative;
+  z-index: 1; }
+  .single-widget-area .widget-title {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 30px;
+    text-align: center;
+    background-color: #0b80fc;
+    height: 40px;
+    border-radius: 2px; }
+    .single-widget-area .widget-title h6 {
+      position: relative;
+      z-index: 5;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0;
+      line-height: 40px;
+      padding: 0 15px;
+      display: inline-block;
+      color: #ffffff; }
+  .single-widget-area .about-thumbnail {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block; }
+    .single-widget-area .about-thumbnail img {
+      border-radius: 50%; }
+  .single-widget-area .widget-content img {
+    margin-top: 20px;
+    margin-bottom: 15px; }
+  .single-widget-area .widget-content p {
+    margin-bottom: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #595959; }
+  .single-widget-area .widget-social-info a {
+    display: inline-block;
+    padding: 0 10px; }
+    .single-widget-area .widget-social-info a:hover, .single-widget-area .widget-social-info a:focus {
+      color: #d1bb95; }
+  .single-widget-area .single-latest-post {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 30px; }
+    .single-widget-area .single-latest-post:last-child {
+      margin-bottom: 0; }
+    .single-widget-area .single-latest-post .post-thumb {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 35%;
+      flex: 0 0 35%;
+      max-width: 35%;
+      width: 35%;
+      margin-right: 30px; }
+    .single-widget-area .single-latest-post .post-content .post-title {
+      position: relative;
+      top: -5px;
+      z-index: 1;
+      line-height: 1;
+      display: block; }
+      .single-widget-area .single-latest-post .post-content .post-title h6 {
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        font-size: 18px;
+        line-height: 1.2;
+        font-weight: 600;
+        margin-bottom: 0; }
+        .single-widget-area .single-latest-post .post-content .post-title h6:hover, .single-widget-area .single-latest-post .post-content .post-title h6:focus {
+          color: #0b80fc; }
+    .single-widget-area .single-latest-post .post-content .post-author {
+      display: block;
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 400; }
+      .single-widget-area .single-latest-post .post-content .post-author span {
+        color: #a6a6a6; }
+  .single-widget-area .newsletter-content {
+    position: relative;
+    z-index: 1; }
+    .single-widget-area .newsletter-content p {
+      margin-bottom: 30px;
+      font-size: 16px;
+      line-height: 1.5; }
+    .single-widget-area .newsletter-content form {
+      position: relative;
+      z-index: 2; }
+      .single-widget-area .newsletter-content form input {
+        background-color: #f2f4f5;
+        padding: 0 20px;
+        width: 100%;
+        height: 50px;
+        font-size: 14px;
+        color: #a6a6a6;
+        border: none;
+        border-radius: 0; }
+        .single-widget-area .newsletter-content form input:focus {
+          box-shadow: none; }
+      .single-widget-area .newsletter-content form button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        z-index: 10;
+        border: none;
+        background-color: #d1bb95;
+        cursor: pointer;
+        color: #ffffff; }
+        .single-widget-area .newsletter-content form button:hover {
+          -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+          background-color: #191919; }
+  .single-widget-area .popular-tags li a {
+    display: inline-block;
+    margin: 4px;
+    border: 1px solid #ebebeb;
+    padding: 10px 15px;
+    line-height: 1;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 400;
+    color: #191919; }
+    .single-widget-area .popular-tags li a:hover, .single-widget-area .popular-tags li a:focus {
+      color: #d1bb95; }
+  .single-widget-area .nikki-catagories {
+    position: relative;
+    z-index: 1; }
+    .single-widget-area .nikki-catagories li a {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      padding: 15px 0;
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 300; }
+      .single-widget-area .nikki-catagories li a span {
+        color: #191919;
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms; }
+        .single-widget-area .nikki-catagories li a span i {
+          position: relative;
+          top: -1px;
+          font-size: 14px;
+          margin-right: 8px; }
+        .single-widget-area .nikki-catagories li a span:last-child {
+          color: #a6a6a6;
+          font-weight: 400; }
+      .single-widget-area .nikki-catagories li a:hover span, .single-widget-area .nikki-catagories li a:focus span {
+        color: #d1bb95; }
+    .single-widget-area .nikki-catagories li:last-child a {
+      border-bottom: none; }
+  .single-widget-area .nikki-archives {
+    position: relative;
+    z-index: 1; }
+    .single-widget-area .nikki-archives li a {
+      display: block;
+      padding: 15px 0;
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 400;
+      color: #595959;
+      -webkit-transition-duration: 500ms;
+      transition-duration: 500ms; }
+      .single-widget-area .nikki-archives li a i {
+        position: relative;
+        top: -3px;
+        font-size: 8px;
+        margin-right: 8px; }
+      .single-widget-area .nikki-archives li a:hover, .single-widget-area .nikki-archives li a:focus {
+        color: #d1bb95; }
+    .single-widget-area .nikki-archives li:last-child a {
+      border-bottom: none; }
+  .single-widget-area .search-form {
+    position: relative;
+    z-index: 2; }
+    .single-widget-area .search-form input {
+      background-color: #f2f4f5;
+      padding: 0 20px;
+      width: 100%;
+      height: 50px;
+      font-size: 14px;
+      color: #a6a6a6;
+      border: none;
+      border-radius: 0; }
+      .single-widget-area .search-form input:focus {
+        box-shadow: none; }
+    .single-widget-area .search-form button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50px;
+      height: 50px;
+      z-index: 10;
+      border: none;
+      background-color: #d1bb95;
+      cursor: pointer;
+      color: #ffffff; }
+      .single-widget-area .search-form button:hover {
+        -webkit-transition-duration: 300ms;
+        transition-duration: 300ms;
+        background-color: #191919; }
+
+        #GFG {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .user {
+  display: flex;
+  margin-top: auto;
+}
+
+.user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info h5 {
+  margin: 0;
+}
+
+.tag {
+  background: #777;
+  border-radius: 50px;
+  font-size: 12px;
+  margin: 0;
+  color: #fff;
+  padding: 2px 10px;
+  text-transform: uppercase;
+}
+
+.tag-teal {
+  background: #ec2c72;
+}
+
+.tag-purple {
+  background: #3d1d94;
+}
+
+.tag-pink {
+  background: #c62bcb;
+}
+</style>
+  
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container-sm" >
+      <div class="row">
+        <div class="col-lg-6 pt-2 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-right">
+          <h1 style="color:#063970">A Safe and Secure blogging experience</h1>
+          <ul>
+            <li><i class="ri-check-line"><span>&#8226</span></i> Hafees Titloyee</li>
+            <li><i class="ri-check-line"><span>&#8226</span></i> Bony John</li>
+            <li><i class="ri-check-line"><span>&#8226</span></i> Venugopal Vazhavilayil Vasudevan</li>
+          </ul>
+          <div class="mt-3">
+            <a href="/composeblog" class="btn-get-started scrollto">Compose Blog</a>
+            <a href="/profilepage" class="btn-get-quote">View Profile</a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
+          <img src="https://i.ibb.co/xLFXj2s/landing-photo.png" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ##### Blog Content Area Start ##### -->
+  <section class="blog-content-area section-padding-100">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <!-- Blog Posts Area -->
+            <div class="col-12 col-lg-8">
+                <div class="blog-posts-area">
+                    <div class="row">
+
+                      <% top_blog1.forEach(blog => { %>
+                        <!-- Featured Post Area -->
+                        <div class="col-12">
+                            <div class="featured-post-area mb-50">
+                                <!-- Thumbnail -->
+                                <div class="post-thumbnail mb-15">
+                                    <a href="#"><img src="https://i.ibb.co/5FTTPJQ/Wireless-Security-Blog.jpg" alt=""></a>
+                                </div>
+                                <!-- Featured Post Content -->
+                                <div class="featured-post-content">
+                                    <p class="post-date"><span class="tag tag-purple">
+                                      <%= blog.category %>
+                                    </span></p>
+                                    
+                                    <a href="/blog/<%= blog.id %>" class="post-title mb-5">
+                                        <h2><%= blog.title %></h2>
+                                    </a>
+                                    <p class="post-excerpt"><%= blog.message.slice(0, 270) %>....</p>
+                                    <div class="user mt-30 mb-15">
+                                      <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="user">
+                                      <div class="user-info">
+                                        <h5><%= blog.postedBy %></h5>
+                                        <h8><%= blog.postedAt %></h8>
+                                      </div>
+                                    </div>
+                                </div>
+                                <!-- Post Meta -->
+                              <%}) %>
+                            </div>
+                        </div>
+
+                        <% blogs.reverse() %> 
+                        <% blogs.forEach(blog => { %>
+                        <!-- Single Blog Post -->
+                        <div class="col-12 col-sm-6">
+                            <div class="single-blog-post mb-50">
+                                <!-- Thumbnail -->
+                                <div class="post-thumbnail mb-15">
+                                    <a href="#"><img src="https://i.ibb.co/5FTTPJQ/Wireless-Security-Blog.jpg" alt=""></a>
+                                </div>
+                                <!-- Content -->
+                                <div class="post-content">
+                                    <p class="post-date mb-15"><span class="tag tag-pink">
+                                      <%= blog.category %>
+                                    </span></p>
+                                    <a href="/blog/<%= blog.id %>" class="post-title ">
+                                      
+                                        <h4><%= blog.title %></h4>
+                                    </a>
+                                    <p class="post-excerpt"><%= blog.message.slice(0, 99) %>....</p>
+                                    <div class="user mt-30">
+                                      <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="user">
+                                      <div class="user-info">
+                                        <h5><%= blog.postedBy %></h5>
+                                        <h8><%= blog.postedAt %></h8>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                        <%}) %>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Blog Sidebar Area -->
+            <div class="col-12 col-sm-9 col-md-6 col-lg-4">
+                <div class="post-sidebar-area">
+
+                    <!-- ##### Single Widget Area ##### -->
+                    <div class="single-widget-area mb-30">
+                        <!-- Title -->
+                        <div class="widget-title">
+                            <h6>Latest Posts</h6>
+                        </div>
+                        <% top_blogs.forEach(blog => { %>
+                        <!-- Single Latest Posts -->
+                        <div class="single-latest-post d-flex">
+                            <div class="post-thumb">
+                                <img src="https://i.ibb.co/5FTTPJQ/Wireless-Security-Blog.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="/blog/<%= blog.id %>" class="post-title">
+                                    <h6><%= blog.title %></h6>
+                                </a>
+                                <a href="#" class="post-author"><span>by</span> <%= blog.postedBy %></a>
+                            </div>
+                        </div>
+                        <%}) %>
+                    </div>
+
+                    <!-- ##### Single Widget Area ##### -->
+                    <div class="single-widget-area mb-30">
+                        <!-- Adds -->
+                        <a href="#"><img src="https://i.ibb.co/5FTTPJQ/Wireless-Security-Blog.jpg" alt=""></a>
+                    </div>
+
+
+
+                    <!-- ##### Single Widget Area ##### -->
+                    <div class="single-widget-area mb-30">
+                        <!-- Title -->
+                        <div class="widget-title">
+                            <h6>popular tags</h6>
+                        </div>
+                        <!-- Tags -->
+                        <ol class="popular-tags d-flex flex-wrap">
+                            <li><a href="#">LifeStyle</a></li>
+                            <li><a href="#">Sport</a></li>
+                            <li><a href="#">Fashion</a></li>
+                            <li><a href="#">Photography</a></li>
+                            <li><a href="#">Yoga</a></li>
+                            <li><a href="#">Health Food</a></li>
+                            <li><a href="#">Summer Holiday</a></li>
+                            <li><a href="#">Supper Food</a></li>
+                            <li><a href="#">Life</a></li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<!-- ##### Blog Content Area End ##### -->
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+<script>
+  AOS.init();
+</script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>

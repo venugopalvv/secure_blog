@@ -1,0 +1,711 @@
+<%- include("./partials/header") %>
+<%- include("./partials/navbarloggedin", {username:username}) %>
+
+<style>
+
+/*--------------------------------------------------------------
+# Card - Test blogs
+--------------------------------------------------------------*/
+
+* {
+  margin: 0;
+  padding: 0; }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #191919;
+  line-height: 1.3;
+  font-weight: 500; }
+
+p {
+  color: #180303;
+  font-size: 16px;
+  line-height: 2;
+  font-weight: 400; }
+
+ul,
+ol {
+  margin: 0; }
+  ul li,
+  ol li {
+    list-style: none; }
+
+img {
+  height: auto;
+  max-width: 100%; }
+
+/* :: 3.1.0 Spacing */
+.mt-5 {
+  margin-top: 5px !important; }
+.mt-10 {
+  margin-top: 10px !important; }
+.mt-15 {
+  margin-top: 15px !important; }
+
+.mt-30 {
+  margin-top: 30px !important; }
+
+.mt-50 {
+  margin-top: 50px !important; }
+
+.mt-70 {
+  margin-top: 70px !important; }
+
+.mt-100 {
+  margin-top: 100px !important; }
+
+.mb-15 {
+  margin-bottom: 15px !important; }
+
+.mb-30 {
+  margin-bottom: 30px !important; }
+
+.mb-50 {
+  margin-bottom: 50px !important; }
+
+.mb-70 {
+  margin-bottom: 70px !important; }
+
+.mb-100 {
+  margin-bottom: 100px !important; }
+
+.ml-15 {
+  margin-left: 15px !important; }
+
+.ml-30 {
+  margin-left: 30px !important; }
+
+.ml-50 {
+  margin-left: 50px !important; }
+
+.mr-15 {
+  margin-right: 15px !important; }
+
+.mr-30 {
+  margin-right: 30px !important; }
+
+.mr-50 {
+  margin-right: 50px !important; }
+
+/* :: 7.0 Featured Post Sildes CSS */
+.featured-post-area {
+  position: relative;
+  z-index: 2; }
+  .featured-post-area .featured-post-content {
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid #ebebeb; }
+    .featured-post-area .featured-post-content .post-date {
+      font-weight: 625;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #0b80fc; }
+    .featured-post-area .featured-post-content .post-title h2 {
+      -webkit-transition-duration: 500ms;
+      transition-duration: 500ms;
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 20px; }
+      .featured-post-area .featured-post-content .post-title h2:hover {
+        color: #0b80fc; }
+        .featured-post-area .featured-post-content .post-excerpt {
+      margin-bottom: 10px; 
+    }
+
+
+
+.post-sidebar-area {
+  position: relative;
+  z-index: 1; }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .post-sidebar-area {
+      margin-top: 50px; } }
+  @media only screen and (max-width: 767px) {
+    .post-sidebar-area {
+      margin-top: 50px; } }
+
+/* :: 11.0 Blog Area CSS */
+.single-blog-post {
+  position: relative;
+  z-index: 1; }
+  .single-blog-post .post-thumbnail {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px; }
+  .single-blog-post .post-content .post-date {
+    font-weight: 625;
+    font-size: 13px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #0b80fc;
+    margin-bottom: 0; }
+  .single-blog-post .post-content .post-title h4 {
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    font-weight: 500; }
+    .single-blog-post .post-content .post-title h4:hover {
+      color: #0b80fc; }
+
+  /* Zoom In #1 */
+  .single-blog-post .post-thumbnail img {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.single-blog-post .post-thumbnail:hover img {
+	-webkit-transform: scale(1.03);
+	transform: scale(1.03);
+}
+
+
+
+/* :: 15.0 Sidebar Area CSS */
+.single-widget-area {
+  position: relative;
+  z-index: 1; }
+  .single-widget-area .widget-title {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 30px;
+    text-align: center;
+    background-color: #0b80fc;
+    height: 40px;
+    border-radius: 2px; }
+    .single-widget-area .widget-title h6 {
+      position: relative;
+      z-index: 5;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0;
+      line-height: 40px;
+      padding: 0 15px;
+      display: inline-block;
+      color: #ffffff; }
+  .single-widget-area .about-thumbnail {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block; }
+    .single-widget-area .about-thumbnail img {
+      border-radius: 50%; }
+  .single-widget-area .widget-content img {
+    margin-top: 20px;
+    margin-bottom: 15px; }
+  .single-widget-area .widget-content p {
+    margin-bottom: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #595959; }
+  .single-widget-area .widget-social-info a {
+    display: inline-block;
+    padding: 0 10px; }
+    .single-widget-area .widget-social-info a:hover, .single-widget-area .widget-social-info a:focus {
+      color: #d1bb95; }
+  .single-widget-area .single-latest-post {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 30px; }
+    .single-widget-area .single-latest-post:last-child {
+      margin-bottom: 0; }
+    .single-widget-area .single-latest-post .post-thumb {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 35%;
+      flex: 0 0 35%;
+      max-width: 35%;
+      width: 35%;
+      margin-right: 30px; }
+    .single-widget-area .single-latest-post .post-content .post-title {
+      position: relative;
+      top: -5px;
+      z-index: 1;
+      line-height: 1;
+      display: block; }
+      .single-widget-area .single-latest-post .post-content .post-title h6 {
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        font-size: 18px;
+        line-height: 1.2;
+        font-weight: 600;
+        margin-bottom: 0; }
+        .single-widget-area .single-latest-post .post-content .post-title h6:hover, .single-widget-area .single-latest-post .post-content .post-title h6:focus {
+          color: #0b80fc; }
+    .single-widget-area .single-latest-post .post-content .post-author {
+      display: block;
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 400; }
+      .single-widget-area .single-latest-post .post-content .post-author span {
+        color: #a6a6a6; }
+  
+  .single-widget-area .popular-tags li a {
+    display: inline-block;
+    margin: 4px;
+    border: 1px solid #ebebeb;
+    padding: 10px 15px;
+    line-height: 1;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 400;
+    color: #191919; }
+    .single-widget-area .popular-tags li a:hover, .single-widget-area .popular-tags li a:focus {
+      color: #d1bb95; }
+  
+
+        #GFG {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .user {
+  display: flex;
+  margin-top: auto;
+}
+
+.user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info h5 {
+  margin: 0;
+}
+
+.tag {
+  background: #777;
+  border-radius: 50px;
+  font-size: 12px;
+  margin: 0;
+  color: #fff;
+  padding: 2px 10px;
+  text-transform: uppercase;
+}
+
+.tag-teal {
+  background: #ec2c72;
+}
+
+.tag-purple {
+  background: #3d1d94;
+}
+
+.tag-pink {
+  background: #c62bcb;
+}
+
+
+/*
+Blog post entries
+*/
+
+.entry-card {
+    -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.entry-content {
+    background-color: #fff;
+    padding: 36px 36px 36px 36px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.entry-content .entry-title a {
+    color: #333;
+}
+
+.entry-content .entry-title a:hover {
+    color: #4782d3;
+}
+
+.entry-content .entry-meta span {
+    font-size: 12px;
+}
+
+.entry-title {
+    font-size: .95rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.entry-thumb {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.entry-thumb img {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.entry-thumb .thumb-hover {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(71, 130, 211, 0.85);
+    display: block;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    font-size: 40px;
+    line-height: 100px;
+    border-radius: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    text-align: center;
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    opacity: 0;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+}
+
+.entry-thumb:hover .thumb-hover {
+    opacity: 1;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+}
+
+.article-post {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 70px;
+}
+
+.article-post .post-thumb {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.article-post .post-thumb .post-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    opacity: 0;
+}
+
+.article-post .post-thumb .post-overlay span {
+    width: 100%;
+    display: block;
+    text-align: center;
+    transform: translateY(70%);
+    -webkit-transform: translateY(70%);
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    height: 100%;
+    color: #fff;
+}
+
+.article-post .post-thumb:hover .post-overlay {
+    opacity: 1;
+}
+
+.article-post .post-thumb:hover .post-overlay span {
+    transform: translateY(50%);
+    -webkit-transform: translateY(50%);
+}
+
+.post-content .post-title {
+    font-weight: 500;
+}
+
+.post-meta {
+    padding-top: 15px;
+    margin-bottom: 20px;
+}
+
+.post-meta li:not(:last-child) {
+    margin-right: 10px;
+}
+
+.post-meta li a {
+    color: #999;
+    font-size: 13px;
+}
+
+.post-meta li a:hover {
+    color: #4782d3;
+}
+
+.post-meta li i {
+    margin-right: 5px;
+}
+
+.post-meta li:after {
+    margin-top: -5px;
+    content: "/";
+    margin-left: 10px;
+}
+
+.post-meta li:last-child:after {
+    display: none;
+}
+
+.post-masonry .masonry-title {
+    font-weight: 500;
+}
+
+.share-buttons li {
+    vertical-align: middle;
+}
+
+.share-buttons li a {
+    margin-right: 0px;
+}
+
+.post-content .fa {
+    color: #ddd;
+}
+
+.post-content a h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0px;
+}
+
+.article-post .owl-carousel {
+    margin-bottom: 20px !important;
+}
+
+.post-masonry h4 {
+    text-transform: capitalize;
+    font-size: 1rem;
+    font-weight: 700;
+}
+.mb40 {
+    margin-bottom: 40px !important;
+}
+.mb30 {
+    margin-bottom: 30px !important;
+}
+.media-body h5 a {
+    color: #555;
+}
+.categories li a:before {
+    content: "\f0da";
+    font-family: 'FontAwesome';
+    margin-right: 5px;
+}
+
+
+.blog-aside .widget-body {
+  padding: 15px;
+}
+
+.tag-cloud a {
+  padding: 4px 15px;
+  font-size: 13px;
+  color: #ffffff;
+  background: #20247b;
+  border-radius: 3px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+.tag-cloud a:hover {
+  background: #fc5356;
+}
+
+.article .tag-cloud {
+  padding-top: 10px;
+}
+
+
+
+</style>
+  
+<br/>
+<br/>
+<br/>
+<br/>
+
+  <!-- ##### Blog Content Area Start ##### -->
+  <section class="blog-content-area section-padding-100">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <!-- Blog Posts Area -->
+            <% blogs.forEach(blog => { %>
+            <div class="col-12 col-lg-8">
+                <div class="blog-posts-area">
+                    <div class="row">
+
+                  
+                        <!-- Featured Post Area -->
+                        <div class="col-12">
+                            <div class="featured-post-area mb-50">
+                                <!-- Thumbnail -->
+                                <div class="post-thumbnail mb-15">
+                                    <a href="#"><img src="https://bootdey.com/img/Content/bg1.jpg" width="800" height="800" alt=""></a>
+                                </div>
+                                <!-- Featured Post Content -->
+                                <div class="featured-post-content">
+
+                                    
+                                    <div class="user mt-30 mb-15">
+                                      <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="user">
+                                      <div class="user-info">
+                                        <h5><%= blog.postedBy %></h5>
+                                        <h8><%= blog.postedAt %></h8>
+                                      </div>
+                                    </div>
+                                    <a href="/blog/<%= blog.id %>" class="post-title mb-5">
+                                        <h2><%= blog.title %></h2>
+                                    </a>
+                                    <p class="post-date"><span class="tag tag-purple">
+                                      <%= blog.category %>
+                                    </span></p>
+     
+                                    <p class="post-excerpt" style="text-align: justify; text-justify: inter-word;"><%= blog.message %> </p>
+              
+                                </div>
+                                <!-- Post Meta -->
+                             
+                            </div>
+                        </div>
+                        
+
+                        <hr class="mb40">
+                        <h4 class="mb40 font500">About Author</h4>
+                        <div class="media mb40">
+                            <i class="d-flex mr-3 fa fa-user-circle fa-3x text-primary"></i>
+                            <div class="media-body">
+                                <h5 class="mt-0 font700" style="text-align: justify; text-justify: inter-word;"><%= blog.postedBy %></h5> <%= blog.postedBy %> is a masters in cyber security student at University of Aast Anglia. He created a blog website as a part of Developing secure software coursework. He created an intelligent Chatbot as a part of Artificial intelligence coursework. 
+                            </div>
+                        </div>
+
+                        
+                        <hr class="mb40">
+                    <h4 class="mb40 text-uppercase font500">Comments</h4>
+                    <% comments.forEach(comment => { %> 
+                    <div class="media mb40" style="text-align: justify; text-justify: inter-word;">
+                        <i class="d-flex mr-3 fa fa-user-circle fa-3x text-info"></i>
+                        <div class="media-body" >
+                            <h5 class="mt-0 font400 clearfix">
+                              <a href="/delete/<%= blog.id %>/<%= comment.comment_id %>" class="float-right"><%= comment.postedAt %></a>
+                              <%= comment.postedBy %></h5> <%= comment.comment %>
+                              <a href="/delete/<%= blog.id %>/<%= comment.comment_id %>" class="float-right mt-15">&nbsp&nbsp&nbsp&nbsp<i class="bi-trash" style="font-size:20px; color:red"></i></a>
+                              
+                        
+                      
+                            </div>
+                    </div>
+                    <%}) %>
+                    <h4 style="color:red;"> <%= msg1%></h4>
+                  <hr class="mb40">
+                    <h4 class="mb40 text-uppercase font500">Post a comment</h4>
+                    <form role="form" action="/comment/<%= blog.id %>" method="POST">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" placeholder="John Doe" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" placeholder="john@doe.com" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Comment</label>
+                            <textarea class="form-control" rows="5" placeholder="Comment" name="comment"></textarea>
+                        </div>
+                        <div class="clearfix float-right">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                        </div>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+            <%}) %>
+
+
+            <!-- Blog Sidebar Area -->
+            <div class="col-12 col-sm-9 col-md-6 col-lg-4">
+                <div class="post-sidebar-area">
+
+                    <!-- ##### Single Widget Area ##### -->
+                    <div class="single-widget-area mb-30">
+                        <!-- Title -->
+                        <div class="widget-title">
+                            <h6>Latest Posts</h6>
+                        </div>
+                        <% blogs_recent.forEach(blog => { %>
+                        <!-- Single Latest Posts -->
+                        <div class="single-latest-post d-flex">
+                            <div class="post-thumb">
+                                <img src="https://i.ibb.co/5FTTPJQ/Wireless-Security-Blog.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="/blog/<%= blog.id %>" class="post-title">
+                                    <h6><%= blog.title %></h6>
+                                </a>
+                                <a href="#" class="post-author"><span>by</span> <%= blog.postedBy %></a>
+                            </div>
+                        </div>
+                        <%}) %>
+                    </div>
+
+                    <!-- ##### Single Widget Area ##### -->
+                    <div class="single-widget-area mb-30">
+                        <!-- Adds -->
+                        <a href="#"><img src="https://i.ibb.co/5FTTPJQ/Wireless-Security-Blog.jpg" alt=""></a>
+                    </div>
+
+
+
+                    <!-- ##### Single Widget Area ##### -->
+                    <div class="single-widget-area mb-30">
+                        <!-- Title -->
+                        <div class="widget-title">
+                            <h6>popular tags</h6>
+                        </div>
+                        <!-- Tags -->
+                        <div class="widget-body">
+                          <div class="nav tag-cloud">
+                              <a href="#">Design</a>
+                              <a href="#">Development</a>
+                              <a href="#">Travel</a>
+                              <a href="#">Web Design</a>
+                              <a href="#">Marketing</a>
+                              <a href="#">Research</a>
+                              <a href="#">Managment</a>
+                          </div>
+                      </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<!-- ##### Blog Content Area End ##### -->
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>

@@ -1,0 +1,65 @@
+<%- include("./partials/header") %>
+<%- include("./partials/navbar4") %>
+<style>
+body {
+    background: #ff006a;
+    background: linear-gradient(to right, #008ae6, #3363ff);
+  }
+</style>
+<!-- Bootstrap 5 Contact Form Snippet -->
+
+<div class="container px-5 my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card border-0 rounded-3 shadow-lg">
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h2 style="text-align:left;color:rgb(13, 110, 253);">New Message</h2> 
+              <p class="mb-4 text-muted"></p>
+            </div>
+
+            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+  
+              <!-- Title Input -->
+              <div class="form-floating mb-3">
+                <input class="form-control" id="name" type="text" placeholder="Title" data-sb-validations="required" />
+                <label for="name">Title</label>
+                <div class="invalid-feedback" data-sb-feedback="name:required">Title is required.</div>
+              </div>
+  
+              <!-- Message Input -->
+              <div class="form-floating mb-3">
+                <textarea class="form-control" id="message" type="text" placeholder="Write your blog here..." style="height: 10rem;" data-sb-validations="required"></textarea>
+                <label for="message">Write your blog here...</label>
+                <div class="invalid-feedback" data-sb-feedback="message:required">Write something.</div>
+              </div>
+  
+              <!-- Submit success message -->
+              <div class="d-none" id="submitSuccessMessage">
+                <div class="text-center mb-3">
+                  <div class="fw-bolder">Message posted successfully!</div>
+                </div>
+              </div>
+  
+              <!-- Submit error message -->
+              <div class="d-none" id="submitErrorMessage">
+                <div class="text-center text-danger mb-3">Cannot post the message!</div>
+              </div>
+  
+              <!-- Submit button -->
+              <div class="form-group float-end">
+                <button class="btn btn-primary btn-md disabled" id="submitButton" type="submit">Post</button>
+                <button class="btn btn-primary btn-md" id="CancelButton" type="submit">Cancel</button>
+              </div>
+            </form>
+            <!-- End of contact form -->
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- CDN Link to SB Forms Scripts -->
+  <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+  <%- include("./partials/footer") %>

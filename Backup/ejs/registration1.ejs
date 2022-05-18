@@ -1,0 +1,120 @@
+<%- include("./partials/header") %>
+<%- include("./partials/navbar3") %>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+    .login {
+        min-height: 100vh;
+    }
+    
+    .bg-image {
+        background-image: url('https://i.ibb.co/W3FWBp6/ernest-imoesi-Pu-Eh-q-N50-Y4-unsplash.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .login-heading {
+        font-weight: 300;
+    }
+    
+    .btn-login {
+        font-size: 0.9rem;
+        letter-spacing: 0.05rem;
+        padding: 0.75rem 1rem;
+    }
+    .login-form .form-group {
+    position: relative;
+}
+    .login-form .form-group .forgot-password {
+    position: absolute;
+    top: 6px;
+    right: 15px;
+}
+
+</style>
+
+<div class="container-fluid ps-md-0">
+    <div class="row g-0">
+      <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+      <div class="col-md-8 col-lg-6">
+        <div class="login d-flex align-items-center py-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-9 col-lg-8 mx-auto">
+                <h3 class="login-heading mb-4">User registration</h3>
+  
+                <!-- Sign In Form -->
+                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+
+                    <div class="form-floating mb-4">
+                        <input type="name" class="form-control" id="name" type="text" placeholder="Name" data-sb-validations="required"/>
+                        <label for="name">Name</label>
+                        <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
+                      </div>
+    
+                    <div class="form-floating mb-4">
+                      <input type="username" class="form-control" id="username" data-sb-validations="required" placeholder="Username"/>
+                      <label for="username">Username</label>
+                      <div class="invalid-feedback" data-sb-feedback="username:required">Username is required.</div>
+                    </div>
+      
+                    <div class="form-floating mb-4">
+                      <input type="email" class="form-control" id="email" data-sb-validations="required" placeholder="Email"/>
+                      <label for="email">E-mail</label>
+                      <div class="invalid-feedback" data-sb-feedback="email:required">E-mail is required.</div>
+                    </div>
+                    <div class="form-floating mb-4">
+                      <input type="password" class="form-control" id="password" data-sb-validations="required" placeholder="Password"/>
+                      <label for="password">Password</label>
+                      <div class="invalid-feedback" data-sb-feedback="password:required">Password is required.</div>
+                    </div>
+    
+                    <div class="form-floating mb-4">
+                        <input type="password" class="form-control" id="repassword" data-sb-validations="required" placeholder="Confirm Password"/>
+                        <label for="repassword">Confirm Password</label>
+                        <div class="invalid-feedback" data-sb-feedback="repassword:required">Re-enter password.</div>
+                      </div>
+      
+                      <div class="form-group mb-4">
+                        <label>Profile Photo</label>
+                        <input type="file" id="Profile-pic" name="channel-img" class="form-control">
+                        <label for="Profile-pic" class="choose-icon"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                      </div>
+
+                    <!-- Submit success message -->
+                    <div class="d-none" id="submitSuccessMessage">
+                        <div class="text-center mb-4">
+                        <div class="fw-bolder">Registration successful!</div>
+                        <p>Login to continue...</p>
+                        </div>
+                    </div>
+        
+                    <!-- Submit error message -->
+                    <div class="d-none" id="submitErrorMessage">
+                        <div class="text-center text-danger mb-4">Error sending message!</div>
+                    </div>
+    
+                    <div class="d-grid mb-4">
+                        <button class="btn btn-primary btn-md disabled" id="submitButton" type="submit">Submit</button>
+                    </div>
+      
+                    <a class="d-block text-center mt-2 small" href="#">Have an account? Sign In</a>
+    
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- CDN Link to SB Forms Scripts -->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<%- include("./partials/footer") %>
