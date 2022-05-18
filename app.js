@@ -102,7 +102,6 @@ app
   app.post('/changepwd', csrfProtection,async (req, res) => {
     console.log(req.body)
     const {_csrf,pswcurrent,psw,pswrepeat} = req.body
-    
     console.log(req.session.userid)
     console.log(_csrf)
     const sessionID = req.session
