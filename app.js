@@ -119,7 +119,6 @@ app
           var msg1 = '';
           var msg2 = 'Password changed Successfully!';
           var msg3 = 'Login to continue.';
-          res.render("login",{message1:msg1, message2:msg2, message3:msg3});
           res.render("login");
           });
 
