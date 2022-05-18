@@ -33,7 +33,8 @@ router
       db.query("DELETE FROM comments WHERE id = ?",[req.params.id], (err, result) => {
         if(err) throw err;
         var username = req.session.user
-      res.render("profilepage", {username:username});
+        var email = req.session.email
+      res.render("profilepage", {username:username, email:email});
     });
   });
   }else{

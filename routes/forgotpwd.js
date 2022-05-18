@@ -18,16 +18,29 @@ var transporter = nodemailer.createTransport({
 router
   .post("/forgotpwd", (req, res) => {
     const {email} = req.body
-    transporter.sendMail({
+    const OTP = otpGenerator.generate(6,  {
+      upperCaseAlphabets: false,
+      lowerCaseAlphabets:false, 
+      specialChars: false,
+      });
+      OTP_gen=OTP;
+      OTP_time=new Date();
+      var email_addr=req.body.email;
+
+      transporter.sendMail({
       from: 'youremail@gmail.com',
-      to: email,
-      subject: 'Your One Time Password',
-      text: 'Your onetime password to safely login in to your account is . OTP is secret and can be used only once. Therefore, do not disclose this to anyone.'
+      to: req.body.email,
+      subject: 'Your OTP for Reset Password',
+      text: 'Your onetime password for changing your password is ' + OTP + '. OTP is secret and can be used only once. Therefore, do not disclose this to anyone.'
       }, (err, info) => {
         console.log(info.envelope);
         console.log(info.messageId);
       });
-    res.render("forgotpwdotp",{email:email});
+      msg1 = 'Validate OTP!'
+      msg2 = ''
+      msg3 = 'An OTP has been send to your registered email address'
+      msg4 = 'OTP is valid only for 60 seconds.'
+      res.render("forgotpwdotp.ejs",{email:email, msg1:msg1, msg2:msg2, msg3:msg3, msg4:msg4})
   })
 
   router
@@ -37,7 +50,6 @@ router
 
   .post("/forgotpwdotp", (req, res) => {
     const {recieved_otp} = req.body
-    console.log(recieved_otp)
     res.render("changepwdforgot");
   })
 

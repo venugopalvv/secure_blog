@@ -45,7 +45,6 @@ app.get('/createdb', (req,res) => {
   let sql = 'CREATE DATABASE secureblog';
   db.query(sql, (err, result) => {
     if(err) throw err;
-    console.log(result);
     res.send('Database created...')
   });
 });
@@ -55,7 +54,6 @@ app.get('/createdbtable', (req,res) => {
   let sql = 'CREATE TABLE blogs(id int AUTO_INCREMENT, title VARCHAR(255), message TEXT(65535), postedBy VARCHAR(255), postedAt VARCHAR(255), category VARCHAR(255), Image BLOB, email VARCHAR(255), PRIMARY KEY (id))';
   db.query(sql, (err, result) => {
     if(err) throw err;
-    console.log(result);
     res.send('Database table created...');
   });
 });
@@ -65,7 +63,6 @@ app.get('/createdbtable1', (req,res) => {
   let sql = 'CREATE TABLE comments(comment_id int AUTO_INCREMENT, id int, comment TEXT(65535), postedBy VARCHAR(255), email VARCHAR(255), postedAt VARCHAR(255), PRIMARY KEY (comment_id))';
   db.query(sql, (err, result) => {
     if(err) throw err;
-    console.log(result);
     res.send('Database table created...');
   });
 });
@@ -83,11 +80,19 @@ app.use(require("./routes/login"))
 app
   .get("/changepwd", csrfProtection, async (req, res,next) => {
     try {
+<<<<<<< Updated upstream
       //console.log(CSRF_TOKEN);
       var username = req.session.user
       res.render('changepwd', {CSRF_TOKEN: req.csrfToken(), username:username});
+=======
+      const sessionID = req.session
+      const CSRF_TOKEN = uuid();
+      SESSION_IDS[sessionID] = CSRF_TOKEN;
+      toke = req.csrfToken()
+      var username = req.session.user
+      res.render('changepwd', {CSRF_TOKEN: toke, username:username});
+>>>>>>> Stashed changes
     } catch (error) {
-      console.log(error)
       res.json({ status: 'error', error: ';))' })
     }
   })
@@ -96,15 +101,17 @@ app
   
   app.post('/changepwd', csrfProtection,async (req, res) => {
     const {_csrf,pswcurrent,psw,pswrepeat} = req.body
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
     const sessionID = req.session
     db.query('SELECT * FROM accounts WHERE email = ?', [req.session.userid], async function(error, results, fields) {
-    console.log(results)
     if (error) throw error;
     if (results.length > 0 ) {
       if (await bcrypt.compare(pswcurrent,results[0].password)) {
         const password = await bcrypt.hash(pswrepeat, 10)
         session=req.session;
-        console.log(pswcurrent)
         db.query("UPDATE accounts SET password = ? WHERE email = ?" ,[password, results[0].email], (err, result) => {
           if(err) throw err;
           var msg1 = '';
