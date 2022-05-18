@@ -76,9 +76,9 @@
                 <!-- Sign In Form -->
                 <form action="/changepwd" method="POST">
                       <div class="form-group">
-                        <input id="csrftoken" hidden name="csrftoken" type="password" value="<%=CSRF_TOKEN %>" class="form-control" placeholder="Enter Current Password" name="csrftoken">
+                        <input id="_csrf" hidden name="_csrf" type="text" value="<%=CSRF_TOKEN %>" class="form-control" placeholder="Enter Current Password" name="_csrf">
                       </div>
-                      <script> document.getElementById("csrftoken").value = CSRF_TOKEN;</script>
+                      <script> document.getElementById("_csrf").value = CSRF_TOKEN;</script>
                       <div class="form-group">
                         <label for="psw-repeat">Current Password<span class="required-field">*</span></label>
                         <input id="current_password" type="password" class="form-control" placeholder="Enter Current Password" name="pswcurrent" required>
