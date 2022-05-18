@@ -67,13 +67,13 @@ router.post('/login', async (req, res) => {
 const { email, psw } = req.body
 db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error, results, fields) {
   if (error) throw error;
-  var currentDate = new Date();
-  var blocked_date = new Date(results[0].blocked_time)
-  var futureDate = new Date(blocked_date.getTime() + minutesToAdd*60000);
 
-  if (currentDate > futureDate ) {
   if (results.length > 0 ) {
+    var currentDate = new Date();
+    var blocked_date = new Date(results[0].blocked_time)
+    var futureDate = new Date(blocked_date.getTime() + minutesToAdd*60000);
     if (await bcrypt.compare(psw,results[0].password)) {
+      if (currentDate > futureDate ) {
       session=req.session;
       session.userid=req.body.email;
       session.user=results[0].name;
@@ -103,11 +103,11 @@ db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error
     }
     
     else {
-        var msg1 = 'Invalid username or password!';
-        var msg2 = '';
-        var msg3 = 'Please try again.';
-        res.render("login",{message1:msg1, message2:msg2, message3:msg3});
-    }
+      var msg1 = 'Your account is blocked because of multiple failed attempts!';
+      var msg2 = '';
+      var msg3 = 'Please try after some time.';
+      res.render("login",{message1:msg1, message2:msg2, message3:msg3});
+  }
 
   }
   else {
@@ -117,11 +117,12 @@ db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error
         res.render("login",{message1:msg1, message2:msg2, message3:msg3});
   } 
 }
-  else {
-    var msg1 = 'Your account is blocked because of multiple failed attempts!';
-    var msg2 = '';
-    var msg3 = 'Please try after some time.';
-    res.render("login",{message1:msg1, message2:msg2, message3:msg3});
+
+else {
+  var msg1 = 'You have entered an invalid username or password!';
+  var msg2 = '';
+  var msg3 = 'Please try again.';
+  res.render("login",{message1:msg1, message2:msg2, message3:msg3});
 }
 })	
 })

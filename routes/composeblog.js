@@ -26,7 +26,7 @@ const formatDate = require('./functions_req');
     db.query(sql, blog, (err, result) => {
       if(err) throw err;
       var username = req.session.user
-      res.render("indexloggedin", {username:username});
+      res.redirect("/indexloggedin");
     });
     }
     else{
