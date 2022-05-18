@@ -13,8 +13,8 @@ const csrfProtection = csrf({ cookie: false });
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
 const MySQLStore = require('express-mysql-session')(sessions);
-const uuidv1 = require('uuidv1');
-const {uuid} = require('uuidv4');
+const uuid = require('uuid');
+//const {uuid} = require('uuidv4');
 
 let ejs = require('ejs');
 
@@ -31,7 +31,7 @@ const SESSION_IDS = {};
 var session;
 const oneDay = 1000 * 300;
 app.use(sessions({
-    secret: uuidv1(),
+    secret: uuid.v4(),
     saveUninitialized:false,
     cookie: { maxAge: oneDay , httpOnly: true, secure: true, sameSite: true, },
     resave: false ,
@@ -83,14 +83,9 @@ app.use(require("./routes/login"))
 app
   .get("/changepwd", csrfProtection, async (req, res,next) => {
     try {
-      const sessionID = req.session
-      const CSRF_TOKEN = uuid();
-      SESSION_IDS[sessionID] = CSRF_TOKEN;
-      toke = req.csrfToken()
       //console.log(CSRF_TOKEN);
       var username = req.session.user
-      res.render('changepwd', {CSRF_TOKEN: toke, username:username});
-      console.log(toke)
+      res.render('changepwd', {CSRF_TOKEN: req.csrfToken(), username:username});
     } catch (error) {
       console.log(error)
       res.json({ status: 'error', error: ';))' })
@@ -100,11 +95,7 @@ app
 
   
   app.post('/changepwd', csrfProtection,async (req, res) => {
-    console.log(req.body)
     const {_csrf,pswcurrent,psw,pswrepeat} = req.body
-    
-    console.log(req.session.userid)
-    console.log(_csrf)
     const sessionID = req.session
     db.query('SELECT * FROM accounts WHERE email = ?', [req.session.userid], async function(error, results, fields) {
     console.log(results)
