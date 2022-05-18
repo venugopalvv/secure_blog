@@ -80,18 +80,9 @@ app.use(require("./routes/login"))
 app
   .get("/changepwd", csrfProtection, async (req, res,next) => {
     try {
-<<<<<<< Updated upstream
       //console.log(CSRF_TOKEN);
       var username = req.session.user
       res.render('changepwd', {CSRF_TOKEN: req.csrfToken(), username:username});
-=======
-      const sessionID = req.session
-      const CSRF_TOKEN = uuid();
-      SESSION_IDS[sessionID] = CSRF_TOKEN;
-      toke = req.csrfToken()
-      var username = req.session.user
-      res.render('changepwd', {CSRF_TOKEN: toke, username:username});
->>>>>>> Stashed changes
     } catch (error) {
       res.json({ status: 'error', error: ';))' })
     }
@@ -101,10 +92,6 @@ app
   
   app.post('/changepwd', csrfProtection,async (req, res) => {
     const {_csrf,pswcurrent,psw,pswrepeat} = req.body
-<<<<<<< Updated upstream
-=======
-    
->>>>>>> Stashed changes
     const sessionID = req.session
     db.query('SELECT * FROM accounts WHERE email = ?', [req.session.userid], async function(error, results, fields) {
     if (error) throw error;
