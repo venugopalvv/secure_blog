@@ -55,11 +55,10 @@ store: sessionStore,
 }));
 
 var transporter = nodemailer.createTransport({
-  host:'smtp.ionos.co.uk',
-  port:'25',
+  service:'gmail',
 auth: {
-  user: 'm108405446-155422786',
-  pass: 'Venu@1982'
+  user: 'seclyblog@gmail.com',
+  pass: 'pdfgfonetuuzeftm'
 }
 });
 
