@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const db = require('../databaseConnection');
 const bcrypt = require("bcrypt")
+var sanitizeHtml = require('sanitize-html');
 
 router
   .get("/registration", (req, res) => {
@@ -11,7 +12,10 @@ router
   })
 
   .post("/registration", async (req, res) => {
-      const { name, email, psw} = req.body;
+      var { name, email, psw} = req.body;
+      name = sanitizeHtml(name);
+      email = sanitizeHtml(email);
+      psw = sanitizeHtml(psw);
       const password = await bcrypt.hash(psw, 10)
       db.query('SELECT * FROM accounts WHERE email = ?',[email], (err, results) => {
         if(err) throw err;

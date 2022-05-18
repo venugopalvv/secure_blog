@@ -10,6 +10,7 @@ const uuidv1 = require('uuidv1');
 const otpGenerator = require('otp-generator');
 var nodemailer = require('nodemailer');
 const https = require('https')
+var sanitizeHtml = require('sanitize-html');
 global.OTP_gen = ''
 global.OTP_attempt = 5
 global.OTP_time = ''
@@ -60,11 +61,10 @@ auth: {
 }
 });
 
-
-
-
 router.post('/login', async (req, res) => {
-const { email, psw } = req.body
+var { email, psw } = req.body
+email = sanitizeHtml(email);
+psw = sanitizeHtml(psw);
 db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error, results, fields) {
   if (error) throw error;
 
@@ -114,7 +114,11 @@ db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error
         var msg1 = 'You have entered an invalid username or password!';
         var msg2 = '';
         var msg3 = 'Please try again.';
-        res.render("login",{message1:msg1, message2:msg2, message3:msg3});
+        setTimeout(() => {
+          res.render("login",{message1:msg1, message2:msg2, message3:msg3});
+        }, "500")
+        
+        
   } 
 }
 
@@ -135,8 +139,8 @@ else {
 
 
 .post('/loginotp', async (req, res) => {
-  const {recieved_otp} = req.body
-
+  var {recieved_otp} = req.body
+  recieved_otp = sanitizeHtml(recieved_otp);
   var datenow = new Date();
   var gen_date = new Date(OTP_time)
   var nextdate = new Date(gen_date.getTime() + minutesToAddOTP*60000);

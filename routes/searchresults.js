@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const db = require('../databaseConnection');
-
+var sanitizeHtml = require('sanitize-html');
 
 
 //search 
@@ -15,7 +15,8 @@ router
 })
 
 .post('/searchresults',(req,res)=>{  
-  const { search} = req.body;
+  var { search} = req.body;
+  search = sanitizeHtml(search);
   db.query('SELECT * FROM blogs WHERE (title LIKE ? OR message LIKE ? OR postedBy LIKE ? OR email LIKE ?)', ['%' + search + '%', '%' + search + '%', '%' + search + '%', '%' + search + '%'], (err, search_results) => {
     if(err) throw err;
     var search_count = search_results.length
@@ -25,7 +26,8 @@ router
 
 .post('/searchloggedin',(req,res)=>{  
   if(typeof req.session.user !== 'undefined'){
-  const { search} = req.body;
+  var { search} = req.body;
+  search = sanitizeHtml(search);
   db.query('SELECT * FROM blogs WHERE (title LIKE ? OR message LIKE ? OR postedBy LIKE ? OR email LIKE ?)', ['%' + search + '%', '%' + search + '%', '%' + search + '%', '%' + search + '%'], (err, search_results) => {
     if(err) throw err;
     var search_count = search_results.length

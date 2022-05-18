@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const db = require('../databaseConnection');
 const formatDate = require('./functions_req');
+var sanitizeHtml = require('sanitize-html');
 
 
   router
@@ -14,8 +15,9 @@ const formatDate = require('./functions_req');
   })
 
   .post("/composeblog", (req, res) => {
-    const { title, message, category, image} = req.body;
-
+    var { title, message, category, image} = req.body;
+    title = sanitizeHtml(title);
+    message = sanitizeHtml(message);
     var d = new Date();
     var blog_date = formatDate(d)
     

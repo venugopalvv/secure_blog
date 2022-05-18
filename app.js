@@ -14,6 +14,7 @@ const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
 const MySQLStore = require('express-mysql-session')(sessions);
 const uuid = require('uuid');
+var sanitizeHtml = require('sanitize-html');
 //const {uuid} = require('uuidv4');
 
 let ejs = require('ejs');
@@ -91,7 +92,10 @@ app
 
   
   app.post('/changepwd', csrfProtection,async (req, res) => {
-    const {_csrf,pswcurrent,psw,pswrepeat} = req.body
+    var {_csrf,pswcurrent,psw,pswrepeat} = req.body
+    pswcurrent = sanitizeHtml(pswcurrent);
+    psw = sanitizeHtml(psw);
+    pswrepeat = sanitizeHtml(pswrepeat);
     const sessionID = req.session
     db.query('SELECT * FROM accounts WHERE email = ?', [req.session.userid], async function(error, results, fields) {
     if (error) throw error;

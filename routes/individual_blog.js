@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const db = require('../databaseConnection');
 const formatDate = require('./functions_req');
+var sanitizeHtml = require('sanitize-html');
 
 router
   .get("/blog/:id", (req, res) => {
@@ -11,7 +12,7 @@ router
         if(err) throw err;
         db.query('SELECT * FROM comments WHERE id = ?',[req.params.id], (err, results3) => {
           if(err) throw err;
-          if(typeof req.session.user == 'undefined'){
+          if(typeof req.session.user === 'undefined'){
             var msg1 = ''
             var username = req.session.user
       res.render("individual_blog", {blogs: results1, blogs_recent: results2, comments:results3, msg1:msg1, username:username});
@@ -56,7 +57,10 @@ router
 
   .post("/edit/:id", (req, res) => {
     if(typeof req.session.user !== 'undefined'){
-    db.query("UPDATE blogs SET title = ?, message = ? WHERE id = ?",[req.body.title, req.body.message, req.params.id], (err, result) => {
+      var { title, message} = req.body;
+      title = sanitizeHtml(title);
+      message = sanitizeHtml(message);
+    db.query("UPDATE blogs SET title = ?, message = ? WHERE id = ?",[title, message, req.params.id], (err, result) => {
       if(err) throw err;
       var username = req.session.user
       res.redirect("/profilepage");
@@ -67,7 +71,10 @@ router
   })
   
   .post("/comment/:id", (req, res) => {
-    const { comment, name, email} = req.body;
+    var { comment, name, email} = req.body;
+    comment = sanitizeHtml(comment);
+    name = sanitizeHtml(name);
+    email = sanitizeHtml(email);
     var d = new Date();
     var comment_date = formatDate(d)
     const id = req.params.id;
