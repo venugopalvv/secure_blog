@@ -18,8 +18,8 @@ var psw_f = '';
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'bonyjohnomcr@gmail.com',
-    pass: 'dtonaqcirzwlwquq'
+    user: 'seclyblog@gmail.com',
+    pass: 'pdfgfonetuuzeftm'
   }
   });
 
@@ -77,9 +77,10 @@ router
       db.query('SELECT * FROM accounts WHERE email = ?',[email_f], (err, results) => {
         if(err) throw err;
       if (results.length == 0){
-      let account = {name_f:name_f, email_f:email_f, password: password}
+        let blocked_status = 'Block'
+      let account = {name_f:name_f, email_f:email_f, password: password, blocked_status:blocked_status}
 
-      var sql = "INSERT INTO accounts (name, password, email)  VALUES (" + db.escape(name_f) + ",'" + password + "'," + db.escape(email_f) + ")";
+      var sql = "INSERT INTO accounts (name, password, email, blocked_status)  VALUES (" + db.escape(name_f) + ",'" + password + "'," + db.escape(email_f) + ",'" + blocked_status + "')";
       db.query(sql, account, (err, result) => {
         if(err) throw err;
         var msg1 = '';

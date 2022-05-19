@@ -573,7 +573,7 @@ Blog post entries
                                         <h8><%= blog.postedAt %></h8>
                                       </div>
                                     </div>
-                                    <a href="/blog/<%= blog.id %>" class="post-title mb-5">
+                                    <a href="/blog/<%= blog.random %>" class="post-title mb-5">
                                         <h2><%= blog.title %></h2>
                                     </a>
                                     <p class="post-date"><span class="tag tag-purple">
@@ -606,9 +606,9 @@ Blog post entries
                         <i class="d-flex mr-3 fa fa-user-circle fa-3x text-info"></i>
                         <div class="media-body" >
                             <h5 class="mt-0 font400 clearfix">
-                              <a href="/delete/<%= blog.id %>/<%= comment.comment_id %>" class="float-right"><%= comment.postedAt %></a>
+                              <a href="/delete/<%= blog.random %>/<%= comment.comment_id %>" class="float-right"><%= comment.postedAt %></a>
                               <%= comment.postedBy %></h5> <%= comment.comment %>
-                              <a href="/delete/<%= blog.id %>/<%= comment.comment_id %>" class="float-right mt-15">&nbsp&nbsp&nbsp&nbsp<i class="bi-trash" style="font-size:20px; color:red"></i></a>
+                              <a href="/delete/<%= blog.random %>/<%= comment.comment_id %>" class="float-right mt-15">&nbsp&nbsp&nbsp&nbsp<i class="bi-trash" style="font-size:20px; color:red"></i></a>
                               
                         
                       
@@ -618,7 +618,7 @@ Blog post entries
                     <h4 style="color:red;"> <%= msg1%></h4>
                   <hr class="mb40">
                     <h4 class="mb40 text-uppercase font500">Post a comment</h4>
-                    <form role="form" action="/comment/<%= blog.id %>" method="POST">
+                    <form role="form" action="/comment/<%= blog.random %>" method="POST">
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" class="form-control" placeholder="Name" name="name">
@@ -659,7 +659,7 @@ Blog post entries
                                 <img src="https://i.ibb.co/5FTTPJQ/Wireless-Security-Blog.jpg" alt="">
                             </div>
                             <div class="post-content">
-                                <a href="/blog/<%= blog.id %>" class="post-title">
+                                <a href="/blog/<%= blog.random %>" class="post-title">
                                     <h6><%= blog.title %></h6>
                                 </a>
                                 <a href="#" class="post-author"><span>by</span> <%= blog.postedBy %></a>

@@ -559,14 +559,14 @@ img {
                             <div class="single-blog-post mb-50">
                                 <!-- Thumbnail -->
                                 <div class="post-thumbnail mb-15">
-                                    <a href="/blog/<%= blog.id %>"><img src="https://i.ibb.co/5FTTPJQ/Wireless-Security-Blog.jpg" alt=""></a>
+                                    <a href="/blog/<%= blog.random %>"><img src="https://i.ibb.co/5FTTPJQ/Wireless-Security-Blog.jpg" alt=""></a>
                                 </div>
                                 <!-- Content -->
                                 <div class="post-content">
                                     <p class="post-date mb-15"><span class="tag tag-pink">
                                       <%= blog.category %>
                                     </span></p>
-                                    <a id = "GFG" href="/blog/<%= blog.id %>" class="post-title ">
+                                    <a id = "GFG" href="/blog/<%= blog.random %>" class="post-title ">
                                       
                                         <h4><%= blog.title %></h4>
                                     </a>
@@ -576,7 +576,7 @@ img {
                                       <div class="user-info">
                                         <h5><%= blog.postedBy %></h5>
                                         <h8><%= blog.postedAt %></h8>
-                                        <span class="post-read-more" style="padding-left:15px;"><a href=" /edit/<%= blog.id %>"><i class="far fa-edit pl-5" style="font-size:20px"></i></a>&nbsp&nbsp&nbsp <a href=" /delete/<%= blog.id %>" ><i class="bi-trash" style="font-size:20px"></i></a></span>
+                                        <span class="post-read-more" style="padding-left:15px;"><a href=" /edit/<%= blog.random %>"><i class="far fa-edit pl-5" style="font-size:20px"></i></a>&nbsp&nbsp&nbsp <a href=" /delete/<%= blog.random %>" ><i class="bi-trash" style="font-size:20px"></i></a></span>
                                       </div>
                                     </div>
                                   </div>
@@ -606,7 +606,7 @@ img {
                                 <img src="https://i.ibb.co/5FTTPJQ/Wireless-Security-Blog.jpg" alt="">
                             </div>
                             <div class="post-content">
-                                <a id = "GFG" href="/blog/<%= blog.id %>" class="post-title">
+                                <a id = "GFG" href="/blog/<%= blog.random %>" class="post-title">
                                     <h6><%= blog.title %></h6>
                                 </a>
                                 <a href="#" class="post-author"><span>by</span> <%= blog.postedBy %></a>

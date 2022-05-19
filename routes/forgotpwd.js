@@ -15,19 +15,12 @@ global.minutesToAddOTP_f=1;
 global.minutesToAddOTP_f=1;
 var email_f='';
 
-var params = {
-  'originator': 'TestMessage',
-  'recipients': [
-    '+447548003200'
-],
-  'body': 'This is a test message'
-};
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'bonyjohnomcr@gmail.com',
-    pass: 'dtonaqcirzwlwquq'
+    user: 'seclyblog@gmail.com',
+    pass: 'pdfgfonetuuzeftm'
   }
   });
 
@@ -63,12 +56,7 @@ router
         console.log(info.envelope);
         console.log(info.messageId);
       });
-      messagebird.messages.create(params, function (err, response) {
-        if (err) {
-          return console.log(err);
-        }
-        console.log(response);
-      });
+
       msg1 = 'Validate OTP!'
       msg2 = ''
       msg3 = 'An OTP has been send to your registered email address'

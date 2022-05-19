@@ -17,6 +17,8 @@ global.OTP_attempt = 5
 global.OTP_time = ''
 global.minutesToAdd=1;
 global.minutesToAddOTP=1;
+var email_f = '';
+var psw_f = '';
 
 router
   .get("/login", (req, res) => {
@@ -57,26 +59,26 @@ store: sessionStore,
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'bonyjohnomcr@gmail.com',
-    pass: 'dtonaqcirzwlwquq'
+    user: 'seclyblog@gmail.com',
+    pass: 'pdfgfonetuuzeftm'
   }
   });
 
 router.post('/login', async (req, res) => {
 var { email, psw } = req.body
-email = sanitizeHtml(email);
-psw = sanitizeHtml(psw);
-db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error, results, fields) {
+email_f = sanitizeHtml(email);
+psw_f = sanitizeHtml(psw);
+db.query('SELECT * FROM accounts WHERE email = ?', [email_f], async function(error, results, fields) {
   if (error) throw error;
 
   if (results.length > 0 ) {
     var currentDate = new Date();
     var blocked_date = new Date(results[0].blocked_time)
     var futureDate = new Date(blocked_date.getTime() + minutesToAdd*60000);
-    if (await bcrypt.compare(psw,results[0].password)) {
+    if (await bcrypt.compare(psw_f,results[0].password)) {
       if (currentDate > futureDate ) {
       session=req.session;
-      session.userid=req.body.email;
+      session.userid=email_f;
       session.userprivilage=results[0].privilage;
       session.user=results[0].name;
       const OTP = otpGenerator.generate(6,  {
@@ -86,11 +88,11 @@ db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error
         });
         OTP_gen=OTP;
         OTP_time=new Date();
-        var email_addr=req.body.email;
+      
 
         transporter.sendMail({
         from: 'youremail@gmail.com',
-        to: req.body.email,
+        to: email_f,
         subject: 'Your One Time Password',
         text: 'Your onetime password to safely login in to your account is ' + OTP + '. OTP is secret and can be used only once. Therefore, do not disclose this to anyone.'
         }, (err, info) => {
@@ -101,7 +103,7 @@ db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error
         msg2 = ''
         msg3 = 'An OTP has been send to your registered email address'
         msg4 = 'OTP is valid only for 60 seconds.'
-        res.render("loginotp.ejs",{email:email_addr, msg1:msg1, msg2:msg2, msg3:msg3, msg4:msg4})
+        res.render("loginotp.ejs",{email:email_f, msg1:msg1, msg2:msg2, msg3:msg3, msg4:msg4})
     }
     
     else {
@@ -159,11 +161,11 @@ else {
       OTP_gen=OTP;
       OTP_time=new Date();
       OTP_attempt--
-      var email_addr=req.session.userid;
 
       transporter.sendMail({
       from: 'youremail@gmail.com',
-      to: email_addr,
+      to: email_f,
+
       subject: 'Your One Time Password',
       text: 'Your onetime password to safely login in to your account is ' + OTP + '. OTP is secret and can be used only once. Therefore, do not disclose this to anyone.'
       }, (err, info) => {
@@ -177,9 +179,9 @@ else {
       msg3 = ''
       msg4 = 'Multiple failed attempts'
       blocked_time = new Date()
-      db.query("UPDATE accounts SET blocked_time = ? WHERE email = ?",[blocked_time, email_addr], (err, result) => {
+      db.query("UPDATE accounts SET blocked_time = ? WHERE email = ?",[blocked_time, email_f], (err, result) => {
         if(err) throw err;
-      res.render("loginotp.ejs",{email:email_addr, msg1:msg1, msg2:msg2, msg3:msg3, msg4:msg4})
+      res.render("loginotp.ejs",{email:email_f, msg1:msg1, msg2:msg2, msg3:msg3, msg4:msg4})
       });
       }
       else if (datenow > nextdate){
@@ -187,14 +189,14 @@ else {
         msg2 = 'OTP Expired! Please enter the new OTP.'
         msg3 = 'A new OTP has been send to your registered email address'
         msg4 = 'OTP is valid only for 60 seconds.'
-        res.render("loginotp.ejs",{email:email_addr, msg1:msg1, msg2:msg2, msg3:msg3, msg4:msg4})
+        res.render("loginotp.ejs",{email:email_f, msg1:msg1, msg2:msg2, msg3:msg3, msg4:msg4})
       }
       else{
         msg1 = ''
         msg2 = 'OTP is invalid. Plesae enter correct OTP!'
         msg3 = 'A new OTP has been send to your registered email address'
         msg4 = 'OTP is valid only for 60 seconds.'
-        res.render("loginotp.ejs",{email:email_addr, msg1:msg1, msg2:msg2, msg3:msg3, msg4:msg4})
+        res.render("loginotp.ejs",{email:email_f, msg1:msg1, msg2:msg2, msg3:msg3, msg4:msg4})
 
       }
   }

@@ -64,7 +64,7 @@ a {
                                 <div class="col-md-12">
                                  <% blogs.forEach(blog => { %>
                                     <div class="search-item">
-                                        <h4 class="mb-1"><a href="/blog/<%= blog.id %>"><%= blog.title %></a></h4>
+                                        <h4 class="mb-1"><a href="/blog/<%= blog.random %>"><%= blog.title %></a></h4>
                                         <div class="font-13 text-success mb-3">by: <%= blog.postedBy %></div>
                                         <div class="font-13 mb-2"><%= blog.postedAt %></div>
                                         <p class="mb-0 text-muted"><%= blog.message.slice(0, 199) %>...</p>
