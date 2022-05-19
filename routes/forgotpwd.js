@@ -15,7 +15,17 @@ global.minutesToAddOTP_f=1;
 global.minutesToAddOTP_f=1;
 var email_f='';
 
+<<<<<<< Updated upstream
 
+=======
+var params = {
+  'originator': 'TestMessage',
+  'recipients': [
+    '+447548003200'
+],
+  'body': 'This is a test message'
+};
+>>>>>>> Stashed changes
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
