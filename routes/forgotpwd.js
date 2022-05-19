@@ -15,6 +15,10 @@ global.minutesToAddOTP_f=1;
 global.minutesToAddOTP_f=1;
 var email_f='';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7ac581aff7d53040f2fc4882a69eab3b4d1cdf74
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
