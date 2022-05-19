@@ -20,8 +20,8 @@ var sanitizeHtml = require('sanitize-html');
     message = sanitizeHtml(message);
     var d = new Date();
     var blog_date = formatDate(d)
-    
-    let blog = {title:title, message:message, postedBy: req.session.user, postedAt: blog_date, category: category, Image:image, email:req.session.userid}
+    let random1 = Math.random();
+    let blog = {title:title, message:message, postedBy: req.session.user, postedAt: blog_date, category: category, Image:image, email:req.session.userid, random:random1}
     let sql = 'INSERT INTO blogs SET ?';
       
     if(typeof req.session.user !== 'undefined'){  

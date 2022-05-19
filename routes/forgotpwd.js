@@ -7,6 +7,7 @@ const csrf = require('csurf')
 const csrfProtection = csrf({ cookie: false });
 var sanitizeHtml = require('sanitize-html');
 const bcrypt = require('bcryptjs')
+var messagebird = require('messagebird')('dxScUo2tmVxLkJWST2MqI5HsD');
 global.OTP_gen_f = ''
 global.OTP_attempt_f = 5
 global.OTP_time_f = ''
@@ -14,29 +15,35 @@ global.minutesToAddOTP_f=1;
 global.minutesToAddOTP_f=1;
 var email_f='';
 
+var params = {
+  'originator': 'TestMessage',
+  'recipients': [
+    '+447548003200'
+],
+  'body': 'This is a test message'
+};
 
 var transporter = nodemailer.createTransport({
-  host:'smtp.ionos.co.uk',
-  port:'25',
-auth: {
-  user: 'm108405446-155422786',
-  pass: 'Venu@1982'
-}
-});
+  service: 'gmail',
+  auth: {
+    user: 'bonyjohnomcr@gmail.com',
+    pass: 'dtonaqcirzwlwquq'
+  }
+  });
 
   router
   .get("/forgotpwd", (req, res) => {
     var msg1 = '';
     var msg2 = 'Reset Password';
     var msg3 = '';
-    res.render("forgotpwd", {email:email_f, msg1:msg1, msg2:msg2, msg3:msg3});
+    res.render("forgotpwd", {msg1:msg1, msg2:msg2, msg3:msg3});
   })
 
 router
   .post("/forgotpwd", (req, res) => {
     var {email} = req.body
     email_f = sanitizeHtml(email);
-    db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error, results, fields) {
+    db.query('SELECT * FROM accounts WHERE email = ?', [email_f], async function(error, results, fields) {
       if (error) throw error;
 
     if (results.length > 0 ) {
@@ -47,7 +54,6 @@ router
       });
       OTP_gen_f=OTP;
       OTP_time_f=new Date();
-      var email_f=req.body.email;
       transporter.sendMail({
       from: 'youremail@gmail.com',
       to: email_f,
@@ -57,18 +63,24 @@ router
         console.log(info.envelope);
         console.log(info.messageId);
       });
+      messagebird.messages.create(params, function (err, response) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log(response);
+      });
       msg1 = 'Validate OTP!'
       msg2 = ''
       msg3 = 'An OTP has been send to your registered email address'
       msg4 = 'OTP is valid only for 60 seconds.'
-      res.render("forgotpwdotp.ejs",{email:email, msg1:msg1, msg2:msg2, msg3:msg3, msg4:msg4})
+      res.render("forgotpwdotp.ejs",{email:email_f, msg1:msg1, msg2:msg2, msg3:msg3, msg4:msg4})
     }
 
     else {
       var msg1 = 'You have entered an invalid email!';
       var msg2 = '';
       var msg3 = 'Please try again.';
-      res.render("forgotpwd.ejs",{email:email, msg1:msg1, msg2:msg2, msg3:msg3});
+      res.render("forgotpwd.ejs",{msg1:msg1, msg2:msg2, msg3:msg3});
     }
   })
 })

@@ -55,13 +55,12 @@ store: sessionStore,
 }));
 
 var transporter = nodemailer.createTransport({
-  host:'smtp.ionos.co.uk',
-  port:'25',
-auth: {
-  user: 'm108405446-155422786',
-  pass: 'Venu@1982'
-}
-});
+  service: 'gmail',
+  auth: {
+    user: 'bonyjohnomcr@gmail.com',
+    pass: 'dtonaqcirzwlwquq'
+  }
+  });
 
 router.post('/login', async (req, res) => {
 var { email, psw } = req.body
@@ -78,6 +77,7 @@ db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error
       if (currentDate > futureDate ) {
       session=req.session;
       session.userid=req.body.email;
+      session.userprivilage=results[0].privilage;
       session.user=results[0].name;
       const OTP = otpGenerator.generate(6,  {
         upperCaseAlphabets: false,
@@ -89,7 +89,7 @@ db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error
         var email_addr=req.body.email;
 
         transporter.sendMail({
-        from: 'otp@secureblog.co.uk',
+        from: 'youremail@gmail.com',
         to: req.body.email,
         subject: 'Your One Time Password',
         text: 'Your onetime password to safely login in to your account is ' + OTP + '. OTP is secret and can be used only once. Therefore, do not disclose this to anyone.'
@@ -105,7 +105,7 @@ db.query('SELECT * FROM accounts WHERE email = ?', [email], async function(error
     }
     
     else {
-      var msg1 = 'Your account is blocked because of multiple failed attempts!';
+      var msg1 = 'Your account is blocked!';
       var msg2 = '';
       var msg3 = 'Please try after some time.';
       res.render("login",{message1:msg1, message2:msg2, message3:msg3});

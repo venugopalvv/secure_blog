@@ -541,7 +541,7 @@ img {
   <div class="container">
     <section class="featured-posts">
       <div class="section-title">
-        <h2 style="color:#063970"><span>My Posts </span></h2>
+        <h2 style="color:#063970"><span>All Posts </span></h2>
       </div>
      <!-- ##### Blog Content Area Start ##### -->
   <section class="blog-content-area section-padding-100">
@@ -552,9 +552,6 @@ img {
             <div class="col-12 col-lg-8">
                 <div class="blog-posts-area">
                     <div class="row">
-
-
-
                         <% blogs.reverse() %> 
                         <% blogs.forEach(blog => { %>
                         <!-- Single Blog Post -->
@@ -575,7 +572,7 @@ img {
                                     </a>
                                     <p class="post-excerpt"><%= blog.message.slice(0, 99) %>....</p>
                                     <div class="user mt-30">
-                                      <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="user">
+                                      <img src="https://i.ibb.co/SPK606J/134.png" alt="user">
                                       <div class="user-info">
                                         <h5><%= blog.postedBy %></h5>
                                         <h8><%= blog.postedAt %></h8>
@@ -653,16 +650,58 @@ img {
     </div>
 </section>
 
-<br/>
-<br/>
-<br/>
-<br/>
 <!-- ##### Blog Content Area End ##### -->
   </section>
   </div>
 <br/>
 <br/>
 <br/>
+
+
+<div class="container">
+  <section class="featured-posts">
+    <div class="section-title">
+      <h2 style="color:#063970"><span>All Users </span></h2>
+    </div>
+   <!-- ##### Blog Content Area Start ##### -->
+<section class="blog-content-area section-padding-100">
+  <div class="container">
+
+
+          <!-- Blog Posts Area -->
+          <div class="col-12 col-lg-8">
+              <div class="blog-posts-area">
+                  <div class="row">
+                      <% all_users.reverse() %> 
+                      <% all_users.forEach(user => { %>
+                      <!-- Single Blog Post -->
+                      <div class="col-12 col-md-5" >
+                        <div class="card mb-50" style="width: 17rem;">
+                          <img src="https://i.ibb.co/SPK606J/134.png" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title"><%= user.name %></h5>
+                            <h6 class="card-title"><%= user.email %></h6>
+                            <p class="card-text"></p>
+                            <a href=" /blockuser/<%= user.email %>" class="btn btn-primary float-none"><%= user.blocked_status %></a>&nbsp&nbsp&nbsp <a href=" /deleteuser/<%= user.email %>" class="btn btn-primary float-none">Delete</a>
+                          </div>
+                        </div>
+                      </div>
+                      <%}) %>
+                  </div>
+              </div>
+          </div>
+
+  </div>
+</section>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<!-- ##### Blog Content Area End ##### -->
+</section>
+</div>
+
 
 <%- include("./partials/footer") %>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
